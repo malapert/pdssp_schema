@@ -101,8 +101,7 @@
         "ssys:targets",
         "ssys:target_class",
         "proj:code",
-        "processing:level",
-        "view:phase_angle"
+        "processing:level"
       ],
       "properties": {
         "ssys:targets": {
@@ -126,31 +125,6 @@
             "EDR",
             "RDR",
             "DERIVED"
-          ]
-        },
-        "view:sun_elevation": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 90
-        },
-        "view:phase_angle": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 180
-        },
-        "pdssp:solar_longitude": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 360
-        },
-        "pdssp:measurement_type": {
-          "type": "string"
-        },
-        "pdssp:target_region": {
-          "enum": [
-            "surface",
-            "atmosphere",
-            "ionosphere"
           ]
         }
       }
