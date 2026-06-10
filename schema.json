@@ -7,9 +7,7 @@
   "allOf": [
     {
       "if": {
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "properties": {
           "type": {
             "const": "Feature"
@@ -31,26 +29,40 @@
         "stac_extensions"
       ],
       "properties": {
+        "geometry": {
+          "type": ["object", "null"]
+        },
         "stac_extensions": {
           "type": "array",
-          "allOf": [
-            {
-              "contains": {
-                "type": "string",
-                "pattern": "stac-extensions.github.io/ssys/"
+          "if": {
+            "properties": {
+              "geometry": {
+                "type": "null"
               }
             },
-            {
-              "contains": {
-                "type": "string",
-                "pattern": "stac-extensions.github.io/projection/"
-              }
+            "required": ["geometry"]
+          },
+          "then": {
+            "contains": {
+              "type": "string",
+              "pattern": "stac-extensions\\.github\\.io/ssys/"
             }
-          ]
-        },
-        "geometry": {
-          "not": {
-            "type": "null"
+          },
+          "else": {
+            "allOf": [
+              {
+                "contains": {
+                  "type": "string",
+                  "pattern": "stac-extensions\\.github\\.io/ssys/"
+                }
+              },
+              {
+                "contains": {
+                  "type": "string",
+                  "pattern": "stac-extensions\\.github\\.io/projection/"
+                }
+              }
+            ]
           }
         },
         "properties": {
@@ -66,14 +78,10 @@
       "allOf": [
         {
           "if": {
-            "required": [
-              "properties"
-            ],
+            "required": ["properties"],
             "properties": {
               "properties": {
-                "required": [
-                  "product:type"
-                ],
+                "required": ["product:type"],
                 "properties": {
                   "product:type": {
                     "const": "sp"
@@ -85,9 +93,7 @@
           "then": {
             "properties": {
               "properties": {
-                "required": [
-                  "cube:dimensions"
-                ]
+                "required": ["cube:dimensions"]
               }
             }
           }
@@ -106,18 +112,11 @@
         "ssys:targets": {
           "type": "array",
           "items": {
-            "enum": [
-              "Mars",
-              "Phobos",
-              "Deimos"
-            ]
+            "enum": ["Mars", "Phobos", "Deimos"]
           }
         },
         "ssys:target_class": {
-          "enum": [
-            "planet",
-            "satellite"
-          ]
+          "enum": ["planet", "satellite"]
         }
       }
     },
