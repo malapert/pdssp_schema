@@ -129,6 +129,7 @@
             "image/x-pds",
             "application/fits",
             "image/tiff; application=geotiff",
+            "application/octet-stream",
             "image/png",
             "image/jpeg"
           ]
