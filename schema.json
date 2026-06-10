@@ -107,7 +107,8 @@
         "ssys:targets",
         "ssys:target_class",
         "proj:code",
-        "processing:level"
+        "processing:level",
+        "view:phase_angle"
       ],
       "properties": {
         "ssys:targets": {
@@ -138,7 +139,7 @@
           "minimum": 0,
           "maximum": 90
         },
-        "pdssp:phase_angle": {
+        "view:phase_angle": {
           "type": "number",
           "minimum": 0,
           "maximum": 180
