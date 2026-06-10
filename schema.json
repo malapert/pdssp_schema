@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://pdssp.cnes.fr/stac/pdssp/v1.0.0/schema.json",
+  "$id": "https://raw.githubusercontent.com/malapert/pdssp_schema/main/schema.json",
   "title": "PDSSP Extension — Mars imagery",
   "description": "PDSSP custom keywords and Mars-imagery service constraints, validated client-side by STAC Browser.",
   "type": "object",
@@ -118,7 +118,7 @@
             "planet",
             "satellite"
           ]
-        },
+        }
       }
     },
     "asset": {
