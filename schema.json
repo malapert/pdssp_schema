@@ -132,7 +132,8 @@
             "image/tiff; application=geotiff",
             "application/octet-stream",
             "image/png",
-            "image/jpeg"
+            "image/jpeg",
+            "application/vnd.google-earth.kml+xml"
           ]
         }
       }
