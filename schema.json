@@ -7,46 +7,94 @@
   "allOf": [
     {
       "if": {
-        "required": ["type"],
-        "properties": { "type": { "const": "Feature" } }
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "const": "Feature"
+          }
+        }
       },
-      "then": { "$ref": "#/definitions/item" }
+      "then": {
+        "$ref": "#/definitions/item"
+      }
     }
   ],
   "definitions": {
     "item": {
       "type": "object",
-      "required": ["geometry", "properties", "assets", "stac_extensions"],
+      "required": [
+        "geometry",
+        "properties",
+        "assets",
+        "stac_extensions"
+      ],
       "properties": {
         "stac_extensions": {
           "type": "array",
           "allOf": [
-            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/ssys/" } },
-            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/projection/" } },
-            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/processing/" } }
+            {
+              "contains": {
+                "type": "string",
+                "pattern": "stac-extensions\\.github\\.io/ssys/"
+              }
+            },
+            {
+              "contains": {
+                "type": "string",
+                "pattern": "stac-extensions\\.github\\.io/projection/"
+              }
+            },
+            {
+              "contains": {
+                "type": "string",
+                "pattern": "stac-extensions\\.github\\.io/processing/"
+              }
+            }
           ]
         },
-        "geometry": { "not": { "type": "null" } },
-        "properties": { "$ref": "#/definitions/fields" },
+        "geometry": {
+          "not": {
+            "type": "null"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/fields"
+        },
         "assets": {
           "type": "object",
-          "additionalProperties": { "$ref": "#/definitions/asset" }
+          "additionalProperties": {
+            "$ref": "#/definitions/asset"
+          }
         }
       },
       "allOf": [
         {
           "if": {
-            "required": ["properties"],
+            "required": [
+              "properties"
+            ],
             "properties": {
               "properties": {
-                "required": ["product:type"],
-                "properties": { "product:type": { "const": "sp" } }
+                "required": [
+                  "product:type"
+                ],
+                "properties": {
+                  "product:type": {
+                    "const": "sp"
+                  }
+                }
               }
             }
           },
           "then": {
             "properties": {
-              "properties": { "required": ["cube:dimensions"] }
+              "properties": {
+                "required": [
+                  "cube:dimensions"
+                ]
+              }
             }
           }
         }
@@ -54,19 +102,62 @@
     },
     "fields": {
       "type": "object",
-      "required": ["datetime", "ssys:targets", "ssys:target_class", "proj:code", "processing:level"],
+      "required": [
+        "datetime",
+        "ssys:targets",
+        "ssys:target_class",
+        "proj:code",
+        "processing:level"
+      ],
       "properties": {
         "ssys:targets": {
           "type": "array",
-          "items": { "enum": ["Mars", "Phobos", "Deimos"] }
+          "items": {
+            "enum": [
+              "Mars",
+              "Phobos",
+              "Deimos"
+            ]
+          }
         },
-        "ssys:target_class": { "enum": ["planet", "satellite"] },
-        "processing:level": { "enum": ["EDR", "RDR", "DERIVED"] },
-        "view:sun_elevation": { "type": "number", "minimum": 0, "maximum": 90 },
-        "pdssp:phase_angle": { "type": "number", "minimum": 0, "maximum": 180 },
-        "pdssp:solar_longitude": { "type": "number", "minimum": 0, "maximum": 360 },
-        "pdssp:measurement_type": { "type": "string" },
-        "pdssp:target_region": { "enum": ["surface", "atmosphere", "ionosphere"] }
+        "ssys:target_class": {
+          "enum": [
+            "planet",
+            "satellite"
+          ]
+        },
+        "processing:level": {
+          "enum": [
+            "EDR",
+            "RDR",
+            "DERIVED"
+          ]
+        },
+        "view:sun_elevation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 90
+        },
+        "pdssp:phase_angle": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 180
+        },
+        "pdssp:solar_longitude": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "pdssp:measurement_type": {
+          "type": "string"
+        },
+        "pdssp:target_region": {
+          "enum": [
+            "surface",
+            "atmosphere",
+            "ionosphere"
+          ]
+        }
       }
     },
     "asset": {
