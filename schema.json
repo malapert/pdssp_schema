@@ -1,87 +1,87 @@
 {
-"$schema": "http://json-schema.org/draft-07/schema#",
-"$id": "https://pdssp.cnes.fr/stac/pdssp/v1.0.0/schema.json",
-"title": "PDSSP Extension — Mars imagery",
-"description": "PDSSP custom keywords and Mars-imagery service constraints, validated client-side by STAC Browser.",
-"type": "object",
-"allOf": [
-{
-"if": {
-"required": ["type"],
-"properties": { "type": { "const": "Feature" } }
-},
-"then": { "$ref": "#/definitions/item" }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://pdssp.cnes.fr/stac/pdssp/v1.0.0/schema.json",
+  "title": "PDSSP Extension — Mars imagery",
+  "description": "PDSSP custom keywords and Mars-imagery service constraints, validated client-side by STAC Browser.",
+  "type": "object",
+  "allOf": [
+    {
+      "if": {
+        "required": ["type"],
+        "properties": { "type": { "const": "Feature" } }
+      },
+      "then": { "$ref": "#/definitions/item" }
+    }
+  ],
+  "definitions": {
+    "item": {
+      "type": "object",
+      "required": ["geometry", "properties", "assets", "stac_extensions"],
+      "properties": {
+        "stac_extensions": {
+          "type": "array",
+          "allOf": [
+            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/ssys/" } },
+            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/projection/" } },
+            { "contains": { "type": "string", "pattern": "stac-extensions\\.github\\.io/processing/" } }
+          ]
+        },
+        "geometry": { "not": { "type": "null" } },
+        "properties": { "$ref": "#/definitions/fields" },
+        "assets": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/definitions/asset" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["properties"],
+            "properties": {
+              "properties": {
+                "required": ["product:type"],
+                "properties": { "product:type": { "const": "sp" } }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "properties": { "required": ["cube:dimensions"] }
+            }
+          }
+        }
+      ]
+    },
+    "fields": {
+      "type": "object",
+      "required": ["datetime", "ssys:targets", "ssys:target_class", "proj:code", "processing:level"],
+      "properties": {
+        "ssys:targets": {
+          "type": "array",
+          "items": { "enum": ["Mars", "Phobos", "Deimos"] }
+        },
+        "ssys:target_class": { "enum": ["planet", "satellite"] },
+        "processing:level": { "enum": ["EDR", "RDR", "DERIVED"] },
+        "view:sun_elevation": { "type": "number", "minimum": 0, "maximum": 90 },
+        "pdssp:phase_angle": { "type": "number", "minimum": 0, "maximum": 180 },
+        "pdssp:solar_longitude": { "type": "number", "minimum": 0, "maximum": 360 },
+        "pdssp:measurement_type": { "type": "string" },
+        "pdssp:target_region": { "enum": ["surface", "atmosphere", "ionosphere"] }
+      }
+    },
+    "asset": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "image/x-pds",
+            "application/fits",
+            "image/tiff; application=geotiff",
+            "image/png",
+            "image/jpeg"
+          ]
+        }
+      }
+    }
+  }
 }
-],
-"definitions": {
-"item": {
-"type": "object",
-"required": ["geometry", "properties", "assets", "stac_extensions"],
-"properties": {
-"stac_extensions": {
-"type": "array",
-"allOf": [
-{ "contains": { "const": "https://stac-extensions.github.io/ssys/v1.1.1/schema.json" } },
-{ "contains": { "const": "https://stac-extensions.github.io/projection/v2.0.0/schema.json" } },
-{ "contains": { "const": "https://stac-extensions.github.io/processing/v1.2.0/schema.json" } }
-]
-},
-"geometry": { "not": { "type": "null" } },
-"properties": { "$ref": "#/definitions/fields" },
-"assets": {
-"type": "object",
-"additionalProperties": { "$ref": "#/definitions/asset" }
-}
-},
-"allOf": [
-{
-"if": {
-"required": ["properties"],
-"properties": {
-"properties": {
-"required": ["product:type"],
-"properties": { "product:type": { "const": "sp" } }
-}
-}
-},
-"then": {
-"properties": {
-"properties": { "required": ["cube:dimensions"] }
-}
-}
-}
-]
-},
-"fields": {
-"type": "object",
-"required": ["datetime", "ssys:targets", "ssys:target_class", "proj:code","processing:level"],
-"properties": {
-"ssys:targets": {
-"type": "array",
-"items": { "enum": ["Mars", "Phobos", "Deimos"] }
-},
-"ssys:target_class": { "enum": ["planet", "satellite"] },
-"processing:level": { "enum": ["EDR", "RDR", "DERIVED"] },
-"view:sun_elevation": { "type": "number", "minimum": 0, "maximum": 90 },
-"pdssp:phase_angle": { "type": "number", "minimum": 0, "maximum": 180 },
-"pdssp:solar_longitude": { "type": "number", "minimum": 0, "maximum": 360 },
-"pdssp:measurement_type": { "type": "string" },
-"pdssp:target_region": { "enum": ["surface", "atmosphere", "ionosphere"] }
-}
-},
-"asset": {
-"type": "object",
-"properties": {
-"type": {
-"enum": [
-"image/x-pds",
-"application/fits",
-"image/tiff; application=geotiff",
-"image/png",
-"image/jpeg"
-]
-}
-}
-}
-}
-}  
