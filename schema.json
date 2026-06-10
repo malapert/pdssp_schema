@@ -100,8 +100,7 @@
         "datetime",
         "ssys:targets",
         "ssys:target_class",
-        "proj:code",
-        "processing:level"
+        "proj:code"
       ],
       "properties": {
         "ssys:targets": {
@@ -120,13 +119,6 @@
             "satellite"
           ]
         },
-        "processing:level": {
-          "enum": [
-            "EDR",
-            "RDR",
-            "DERIVED"
-          ]
-        }
       }
     },
     "asset": {
