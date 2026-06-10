@@ -126,6 +126,7 @@
       "properties": {
         "type": {
           "enum": [
+            "text/plain",
             "image/x-pds",
             "application/fits",
             "image/tiff; application=geotiff",
