@@ -38,7 +38,6 @@
       "required": [
         "geometry",
         "properties",
-        "assets",
         "stac_extensions"
       ],
       "properties": {
